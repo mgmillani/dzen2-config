@@ -1,0 +1,19 @@
+background yes
+out_to_x no
+out_to_console yes
+update_interval 3
+total_run_times 0
+use_spacer none
+
+TEXT
+^fg(\#22b926)^i($DZEN2_DATA/icons/processor.xbm) \
+${cpu}% ^fg() \
+^fg(\#12a8c8) ^i($DZEN2_DATA/icons/memory.xbm) \
+${memperc}% ^fg() \
+^fg(\#ffdd00)^i($DZEN2_DATA/icons/battery.xbm) \
+${battery_time} ^fg() \
+^fg(\#ff5a00)^i($DZEN2_DATA/icons/calendar.xbm)\
+${time %Y.%m.%d }^fg() \
+^fg(\#9aee00)^i($DZEN2_DATA/icons/clock.xbm) \
+${time %H:%M}^fg() \
+^fg(\#ccccFF)${execi 1800 temperature EDDT}^fg() \
