@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ $# < 1 ]]
+then
+	echo "usage: $0 <station id>"
+	echo "Example: $0 EDDT"
+else
+	command="pymetar $1"
+	filter="grep Temperature | sed \"s/[ ]*Temperature:[ ]*\(-*[0-9]*\).*/\1°C/\""
+	data=$(eval "$command" 2> /dev/null)
+	if [[ $? != 0 ]]
+	then
+		count=1
+		while [[ $count != 0 ]]
+		do
+			#sleep 15
+			data=$(eval "$command" 2> /dev/null)
+			[[ $? == 0 ]] && let count=1
+			count=$((count - 1))
+		done
+	fi
+	eval "echo \"$data\" | $filter"
+fi
